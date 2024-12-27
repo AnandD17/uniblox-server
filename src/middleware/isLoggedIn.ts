@@ -22,9 +22,17 @@ export const isLoggedIn = async (req: Request & { user?: any }, res: Response, n
 };
 
 export const isAdmin = async (req: Request & { user?: any }, res: Response, next: NextFunction) => {
-    await isLoggedIn(req, res, next);
-    if (req.user.role !== 'admin') {
-        return next(new ApiError(httpStatus.UNAUTHORIZED, 'Unauthorized'));
-    }
-    next();
+    // Call isLoggedIn and return if it encounters an error
+    await isLoggedIn(req, res, (err) => {
+        if (err) {
+            return next(err); // Stop execution if an error occurs
+        }
+
+        // Continue if user is logged in
+        if (req.user?.role !== 'admin') {
+            return next(new ApiError(httpStatus.FORBIDDEN, 'Restricted to admins only'));
+        }
+        
+        next(); // User is admin, continue to the next middleware
+    });
 };

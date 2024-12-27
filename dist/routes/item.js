@@ -4,12 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const user_1 = __importDefault(require("./user"));
-const item_1 = __importDefault(require("./item"));
-const cart_1 = __importDefault(require("./cart"));
+const items_1 = require("../controllers/items");
+const isLoggedIn_1 = require("../middleware/isLoggedIn");
 const router = express_1.default.Router();
-router.use('/user', user_1.default);
-router.use('/items', item_1.default);
-router.use('/cart', cart_1.default);
+router.get('/', items_1.getItems);
+router.get('/:id', items_1.getItemById);
+router.post('/seed', isLoggedIn_1.isLoggedIn, isLoggedIn_1.isAdmin, items_1.seedItems);
 exports.default = router;
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=item.js.map

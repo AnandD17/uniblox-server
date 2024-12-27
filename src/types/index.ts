@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 export type TNotes = {
   title: string;
   description: string;
@@ -29,5 +31,17 @@ export type TItem = {
 };
 
 export type TItemWithId = TItem & {
+  _id: string;
+};
+
+export type TCart = {
+  userId: string;
+  items: {
+    item: mongoose.Types.ObjectId;
+    quantity: number;
+  }[];
+};
+
+export type TCartWithId = TCart & {
   _id: string;
 };

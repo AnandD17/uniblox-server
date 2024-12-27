@@ -15,22 +15,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const app = (0, express_1.default)();
 const dotenv_1 = __importDefault(require("dotenv"));
-const db_js_1 = __importDefault(require("./config/db.js"));
+const db_1 = __importDefault(require("./config/db"));
 dotenv_1.default.config();
 const port = 4000;
 const routes_1 = __importDefault(require("./routes"));
-const error_js_1 = require("./middleware/error.js");
+const error_1 = require("./middleware/error");
 const cors_1 = __importDefault(require("cors"));
 (() => __awaiter(void 0, void 0, void 0, function* () {
-    yield (0, db_js_1.default)();
+    yield (0, db_1.default)();
     app.use(express_1.default.json());
     app.use((0, cors_1.default)());
     app.get('/', (req, res) => {
-        res.send('Hello World!');
+        res.send('API is running');
     });
     app.use('/api', routes_1.default);
-    app.use(error_js_1.errorConverter);
-    app.use(error_js_1.errorHandler);
+    app.use(error_1.errorConverter);
+    app.use(error_1.errorHandler);
     app.listen(port, () => {
         return console.log(`Express is listening at http://localhost:${port}`);
     });

@@ -42,10 +42,15 @@ const getCart = (userId) => __awaiter(void 0, void 0, void 0, function* () {
     const cart = yield models_1.default.cart.findOne({ userId }).populate('items.item');
     return cart;
 });
+const clearCart = (cartId) => __awaiter(void 0, void 0, void 0, function* () {
+    const cart = yield models_1.default.cart.findOneAndUpdate({ _id: cartId }, { $set: { items: [] } }, { new: true });
+    return cart;
+});
 const cartService = {
     addItemToCart,
     updateItemQuantity,
-    getCart
+    getCart,
+    clearCart
 };
 exports.default = cartService;
 //# sourceMappingURL=cart.js.map

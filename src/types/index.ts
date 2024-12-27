@@ -45,3 +45,26 @@ export type TCart = {
 export type TCartWithId = TCart & {
   _id: string;
 };
+
+export type TDiscount = {
+  code: string;
+  description: string;
+  discount: number;
+  nthOrder: number;
+  isActive: boolean;
+};
+
+export type TDiscountWithId = TDiscount & {
+  _id: string;
+};
+
+export type TOrder = {
+  userId: string;
+  items: {
+    item: mongoose.Types.ObjectId;
+    quantity: number;
+  }[];
+  discount: mongoose.Types.ObjectId;
+  totalBeforeDiscount: number;
+  total: number;
+};

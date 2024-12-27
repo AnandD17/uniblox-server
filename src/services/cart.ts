@@ -41,10 +41,16 @@ const getCart = async (userId: string) => {
     return cart;
 };
 
+const clearCart = async (cartId: string) => {
+    const cart = await db.cart.findOneAndUpdate({ _id: cartId }, { $set: { items: [] } }, { new: true });
+    return cart;
+};
+
 const cartService = {
     addItemToCart,
     updateItemQuantity,
-    getCart
+    getCart,
+    clearCart
 };
 
 export default cartService;

@@ -1,0 +1,254 @@
+{
+	"info": {
+		"_postman_id": "0d06a840-0898-4286-a2eb-74ebe487cbe1",
+		"name": "uniblox",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "27640959"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "Add User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"avdoddamani123@gmail.com\",\n    \"password\":\"123456\",\n    \"name\":\"Anand\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/api/user"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzZlNmZmYjI2YTE5NDE3NjA0OTFkYTUiLCJpYXQiOjE3MzUyOTEyMjcsImV4cCI6MTczNzg4MzIyN30.BSwzSAE2hinPxFIlgrYkt9GDZSTU5noTPiGvXb9zW1s"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Anand Doddamani\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/api/user"
+					},
+					"response": []
+				},
+				{
+					"name": "Login user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"avdoddamani123@gmail.com\",\n    \"password\":\"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/api/user/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Get me",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzZlNmZmYjI2YTE5NDE3NjA0OTFkYTUiLCJpYXQiOjE3MzUyOTEyMjcsImV4cCI6MTczNzg4MzIyN30.BSwzSAE2hinPxFIlgrYkt9GDZSTU5noTPiGvXb9zW1s"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/api/user/me"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Items",
+			"item": [
+				{
+					"name": "seed-data",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "{{BASE_URL}}/api/items/seed"
+					},
+					"response": []
+				},
+				{
+					"name": "get items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{BASE_URL}}/api/items"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cart",
+			"item": [
+				{
+					"name": "add to cart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "{{BASE_URL}}/api/cart/676e7bdeba790bb79458a9cb"
+					},
+					"response": []
+				},
+				{
+					"name": "get cart",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{BASE_URL}}/api/cart/"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "discount",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"code\":\"FIRSTORDER\",\n    \"description\":\"this is first order discount\",\n    \"discount\":10,\n    \"nthOrder\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/api/discount"
+					},
+					"response": []
+				},
+				{
+					"name": "get Discount",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{BASE_URL}}/api/discount/"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "order",
+			"item": [
+				{
+					"name": "create Order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "{{BASE_URL}}/api/order/"
+					},
+					"response": []
+				},
+				{
+					"name": "my orders",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "order summary",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{BASE_URL}}/api/order/summary"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzZlNmZmYjI2YTE5NDE3NjA0OTFkYTUiLCJpYXQiOjE3MzUyOTEyMjcsImV4cCI6MTczNzg4MzIyN30.BSwzSAE2hinPxFIlgrYkt9GDZSTU5noTPiGvXb9zW1s"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:4000",
+			"type": "string"
+		}
+	]
+}

@@ -1,9 +1,10 @@
 import express from "express"
-import { createOrder, getOrders } from "../controllers/order";
-import { isLoggedIn } from "../middleware/isLoggedIn";
+import { createOrder, getOrders, getOrderSummary } from "../controllers/order";
+import { isAdmin, isLoggedIn } from "../middleware/isLoggedIn";
 
 const router = express.Router();
 
 router.post('/',isLoggedIn, createOrder);
 router.get('/',isLoggedIn, getOrders);
+router.get('/summary',isAdmin, getOrderSummary);
 export default router;

@@ -1,6 +1,7 @@
 import db from "../models";
 import { ICart } from "../models/cart";
-import { TItem } from "../types";
+import { IOrder } from "../models/order";
+import { TDiscount, TItem, TOrder } from "../types";
 import cartService from "./cart";
 import discountService from "./discount";
 
@@ -25,6 +26,7 @@ const createOrder = async (cartId: string) => {
         items: cart.items,
         totalBeforeDiscount,
         discount,
+        discountId: discount?._id,
         total,
     });
     // empty the cart
@@ -37,9 +39,42 @@ const getOrders = async (userId: string) => {
     return orders;
 };
 
-const orderService = {
-    createOrder,
-    getOrders
-}
+const getOrderSummary = async () => {
+    const orders = await db.order.find({  }).populate('discount') as (IOrder & {discount: TDiscount})[];
+    
+    // Calculate total items purchased
+    const itemCount = orders.reduce((acc, order) => {
+        return acc + order.items.reduce((itemAcc, item) => itemAcc + item.quantity, 0);
+    }, 0);
 
-export default orderService;
+    // Calculate total purchase amount
+    const totalPurchaseAmount = orders.reduce((acc, order) => acc + order.total, 0);
+
+    // Get list of discount codes used
+    const discountCodes = orders
+        .filter(order => order.discount)
+        .map(order => ({
+            code: order.discount.code,
+            amount: order.totalBeforeDiscount - order.total,
+            itemsCount: order.items.reduce((acc, item) => acc + item.quantity, 0),
+        }));
+
+    // Calculate total discount amount
+    const totalDiscountAmount = orders.reduce((acc, order) => {
+        return acc + (order.totalBeforeDiscount - order.total);
+    }, 0);
+
+    return {
+        itemCount,
+        totalPurchaseAmount,
+        discountCodes,
+        totalDiscountAmount
+    };
+};
+
+
+export default {
+    createOrder,
+    getOrders,
+    getOrderSummary
+}

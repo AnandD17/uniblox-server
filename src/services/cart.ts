@@ -37,7 +37,7 @@ const updateItemQuantity = async (userId: string, itemId: string, quantity: numb
 };
 
 const getCart = async (userId: string) => {
-    const cart = await db.cart.findOne({ userId }).populate('items.item');
+    const cart = await db.cart.findOne({ userId }).populate('items.item').lean();
     return cart;
 };
 

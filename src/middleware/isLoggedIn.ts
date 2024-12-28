@@ -6,6 +6,7 @@ import userService from "../services/user";
 
 export const isLoggedIn = async (req: Request & { user?: any }, res: Response, next: NextFunction) => {
     const token = req.headers.authorization?.split(' ')[1];
+    console.log(token);
     if (!token) {
         return next(new ApiError(httpStatus.UNAUTHORIZED, 'Unauthorized'));
     }

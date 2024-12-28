@@ -20,6 +20,7 @@ const user_1 = __importDefault(require("../services/user"));
 const isLoggedIn = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     const token = (_a = req.headers.authorization) === null || _a === void 0 ? void 0 : _a.split(' ')[1];
+    console.log(token);
     if (!token) {
         return next(new ApiError_1.default(http_status_1.default.UNAUTHORIZED, 'Unauthorized'));
     }
